@@ -149,6 +149,13 @@ helm upgrade --install nginx-alpine -f custom-values.yaml -f env.yaml ./ --names
 helm template --debug -f hello/values.yaml --namespace datree --create-namespace hello/
 ```
 
+- Helm Chart API Version
+
+```bash
+apiVersion: v2
+```
+
+Note: Above apiVersion is helm chart api version for helm 3
 
 
 ### Helm Diff Plugin
