@@ -43,21 +43,11 @@ helm install --debug
 
 - helm repo add bitnami https://charts.bitnami.com/bitnami
 
+- helm repo --help
 
+- helm history release-name -n learning
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Note: Above command will list all the revisions of the release
 
 
 ### Basic Helm Commands
