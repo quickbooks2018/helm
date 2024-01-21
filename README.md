@@ -114,6 +114,43 @@ helm -n default rollback hello 2
 helm -n default rollback hello 1 --dry-run
 ```
 
+### Verfiying te Helm Chart
+
+- Helm lint
+
+```bash
+helm lint dirname
+helm lint hello-0.1.0.tgz
+```
+
+- Helm lint defines the helm chart and yaml format is correct or not
+
+- Helm template
+
+```bash
+helm template -f hello/values.yaml --namespace datree --create-namespace hello/
+helm template -f hello/values.yaml --namespace datree --create-namespace hello/ > pureyaml.yaml
+helm template -f hello/values.yaml --namespace datree --create-namespace hello/ --dry-run
+```
+
+- Helm template defines the helm chart and yaml format is correct or not
+
+- Helm Dry Run
+
+```bash
+helm upgrade --install nginx-alpine -f custom-values.yaml -f env.yaml ./ --namespace default --create-namespace --dry-run
+```
+
+- Helm dry run test with kubernetes api connectivity and helm chart is correct or not
+
+- Helm template --debug command is very hand to spot and detect the errors
+
+```bash
+helm template --debug -f hello/values.yaml --namespace datree --create-namespace hello/
+```
+
+
+
 ### Helm Diff Plugin
 ```bash
 helm plugin install https://github.com/databus23/helm-diff
