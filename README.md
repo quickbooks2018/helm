@@ -106,6 +106,14 @@ helm template -f hello/values.yaml --namespace datree --create-namespace hello/ 
 helm template -f hello/values.yaml --namespace datree --create-namespace hello/ --dry-run
 ```
 
+### helm Rollback
+```bash
+helm -n default rollback release-name revision-number
+helm -n default rollback hello 1
+helm -n default rollback hello 2
+helm -n default rollback hello 1 --dry-run
+```
+
 ### Helm Diff Plugin
 ```bash
 helm plugin install https://github.com/databus23/helm-diff
