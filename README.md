@@ -161,6 +161,8 @@ Note: Above apiVersion is helm chart api version for helm 3
 
 #### Helm functions
 
+- https://helm.sh/docs/chart_template_guide/function_list/
+
 - Example 1
 
 ```bash
@@ -176,6 +178,15 @@ Note: Above apiVersion is helm chart api version for helm 3
 {{- printf "{}" | quote }}
 {{- end }}
 ```
+
+- Q Which function takes a list of values and returns the first non-empty one?
+- A coalesce
+
+- Q Which function can be used to generate a random password that uses only letters a-zA-Z?
+- A randAlpha
+
+- Q We have decided that all labels have the first letter in upper case. which function can we use to achieve this?
+- A title
 
 #### Helm pipeline
 
