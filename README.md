@@ -211,7 +211,7 @@ Note: Above apiVersion is helm chart api version for helm 3
 {{- end }}
 ```
 
-- Helm Conditions
+#### Helm Conditions
 
 ```bash
 {{- if .Values.image.pullPolicy }}
@@ -232,6 +232,22 @@ The use of | quote wraps the output in quotes, which is often necessary in JSON 
 The - in the template tags ({{- and -}}) ensures that the output does not have leading or trailing whitespaces or newlines that could disrupt the structure of the resultant YAML or JSON.
 ```
 
+- if with eq
+```explain
+if conditional in Helm templates can be combined with the eq function to compare values. The eq function is used to check for equality between two values. Here's an example of using if with eq in a Helm template:
+
+Suppose you have a Helm chart where you want to perform an action only if a certain value equals a specific string or number. Let's say you have a value named environment in your values.yaml file, and you want to do something specific when environment is set to "production".
+```
+- Example 1
+```explain
+{{- if eq .Values.environment "production" }}
+# Commands or template expressions to execute when environment is production
+{{- printf "Environment is set to production." | quote }}
+{{- else }}
+# Commands or template expressions to execute when environment is not production
+{{- printf "Environment is not production." | quote }}
+{{- end }}
+```
 
 
 ### Helm Diff Plugin
