@@ -188,6 +188,9 @@ Note: Above apiVersion is helm chart api version for helm 3
 - Q We have decided that all labels have the first letter in upper case. which function can we use to achieve this?
 - A title
 
+- Q which function convert all letters to lower case?
+- A lower
+
 #### Helm pipeline
 
 - Chaining together multiple functions to express a series of transformations is known as a pipeline.
@@ -207,6 +210,28 @@ Note: Above apiVersion is helm chart api version for helm 3
 {{- printf "{}" | quote }}
 {{- end }}
 ```
+
+- Helm Conditions
+
+```bash
+{{- if .Values.image.pullPolicy }}
+{{- printf "{\"imagePullPolicy\": \"%s\"}" .Values.image.pullPolicy | quote | indent 2 }}
+{{- else }}
+{{- printf "{}" | quote }}
+{{- end }}
+```
+
+- Note: - means remove the white space, + means add the white space
+- Note: if condition is true then only it will execute the code
+```explain
+If .Values.image.pullPolicy is set (i.e., it has a non-null value), it will print a JSON object like {"imagePullPolicy": "value"}, where value is replaced with the actual pullPolicy.
+
+If .Values.image.pullPolicy is not set, it will print an empty JSON object {}.
+The use of | quote wraps the output in quotes, which is often necessary in JSON structures.
+| indent 2 is used to indent the output by two spaces, which can be useful for formatting, especially in YAML files.
+The - in the template tags ({{- and -}}) ensures that the output does not have leading or trailing whitespaces or newlines that could disrupt the structure of the resultant YAML or JSON.
+```
+
 
 
 ### Helm Diff Plugin
