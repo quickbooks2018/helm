@@ -249,6 +249,15 @@ Suppose you have a Helm chart where you want to perform an action only if a cert
 {{- end }}
 ```
 
+#### Helm Ranges 
+
+- Q What is range in helm?
+- A The range function in Helm is used to iterate over a list of values. It allows you to perform a set of actions for each value in the list within a Helm template. This is particularly useful for creating repetitive elements in Kubernetes manifests based on a list of values provided, such as generating configuration for multiple pods or services.
+
+
+
+
+
 
 ### Helm Diff Plugin
 ```bash

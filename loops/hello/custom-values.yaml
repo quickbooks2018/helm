@@ -1,0 +1,17 @@
+deployments:
+  - name: deployment1
+    imageTag: latest
+  - name: deployment2
+    imageTag: alpine
+  - name: deployment3
+    imageTag: 1.15.8
+
+services:
+  - name: service1
+  - name: service2
+  - name: service3
+
+image:
+  repository: nginx
+  # Default image tag, used if a specific tag is not provided in deployments
+  tag: default_tag
