@@ -158,6 +158,46 @@ apiVersion: v2
 Note: Above apiVersion is helm chart api version for helm 3
 
 
+
+#### Helm functions
+
+- Example 1
+
+```bash
+{{ .Values.image.repository | default .Chart.Name | printf "%s" .Chart.Name }}
+```
+
+- Example 2
+    
+```bash
+{{- if .Values.image.pullPolicy }}
+{{- printf "{\"imagePullPolicy\": \"%s\"}" .Values.image.pullPolicy | quote }}
+{{- else }}
+{{- printf "{}" | quote }}
+{{- end }}
+```
+
+#### Helm pipeline
+
+- Chaining together multiple functions to express a series of transformations is known as a pipeline.
+
+- Example 1
+
+```bash
+{{ .Values.image.repository | default .Chart.Name | printf "%s" | quote }}
+```
+
+- Example 2
+
+```bash
+{{- if .Values.image.pullPolicy }}
+{{- printf "{\"imagePullPolicy\": \"%s\"}" .Values.image.pullPolicy | quote | indent 2 }}
+{{- else }}
+{{- printf "{}" | quote }}
+{{- end }}
+```
+
+
 ### Helm Diff Plugin
 ```bash
 helm plugin install https://github.com/databus23/helm-diff
