@@ -255,9 +255,64 @@ Suppose you have a Helm chart where you want to perform an action only if a cert
 - A The range function in Helm is used to iterate over a list of values. It allows you to perform a set of actions for each value in the list within a Helm template. This is particularly useful for creating repetitive elements in Kubernetes manifests based on a list of values provided, such as generating configuration for multiple pods or services.
 
 
+- Test1
+```bash
+update the configmap.yaml in such a way that the APP_COLOR should take the values based on the environment defined in values.yaml .
 
 
+if environment is production, value should be pink.
 
+else if environment is development, value should be darkblue.
+
+else, value should be green.
+
+Note: Only make the necessary changes in the configmap.yaml file.
+```
+
+- Solution
+- configmap.yaml
+```yaml
+apiVersion: v1
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: default
+kind: ConfigMap
+data:
+  {{- if eq .Values.environment "production" }}
+    APP_COLOR: pink
+  {{- else if eq .Values.environment "development" }}
+    APP_COLOR: darkblue
+  {{- else }}
+    APP_COLOR: green
+  {{- end }}
+```
+
+- values.yaml
+```yaml
+environment: production
+```
+
+- Templates
+```explain
+The text you've provided is mostly correct but could benefit from some clarifications and a correction in the example to accurately reflect how Helm processes files and templates. Here's a revised version:
+
+Note: In Helm, any files within the templates directory that start with an underscore (_) are treated as helper files and are not rendered directly as Kubernetes manifests.
+
+Example: The file named _helpers.tpl is considered a helper template and will be ignored by Helm in terms of direct rendering into Kubernetes objects.
+
+To utilize the contents or define reusable snippets in the _helpers.tpl file, the include function is used in Helm templates.
+```
+
+- Example 1
+```bash
+{{- include "labels" . -}}
+```
+
+```explain
+This example demonstrates the use of the include function to incorporate the output of a template defined in _helpers.tpl (in this case, "labels") into another Helm template. The . symbol is used to pass the current context to the included template. The original text incorrectly used the template keyword, which is not typically used for accessing _helpers.tpl. The include keyword is the appropriate choice for this purpose.
+```
+
+- Note: indent function is used to fix the indentation
 
 ### Helm Diff Plugin
 ```bash
