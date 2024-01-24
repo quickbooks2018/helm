@@ -314,6 +314,57 @@ This example demonstrates the use of the include function to incorporate the out
 
 - Note: indent function is used to fix the indentation
 
+#### Helm hooks
+
+```explain
+Helm hooks are a powerful feature in Helm charts that allow you to control the lifecycle of your Kubernetes applications. They let you perform actions at certain points in the deployment process, such as installing, upgrading, or deleting resources. Helm hooks are managed through annotations in Kubernetes manifest files.
+
+Types of Helm Hooks:
+pre-install: Executes before any resources are installed into Kubernetes. Useful for setting up prerequisites or configurations needed for your application.
+
+post-install: Executes after all resources are installed into Kubernetes. Often used for setup tasks that require the application to be running.
+
+pre-delete: Executes before a chart is deleted. This can be useful for cleaning up resources that aren't managed directly by Helm.
+
+post-delete: Executes after a chart is deleted. Used for final cleanup actions.
+
+pre-upgrade: Executes before an upgrade of a release. It helps in preparing the environment for the upgrade.
+
+post-upgrade: Executes after the upgrade of a release. Useful for tasks that should happen after the upgrade.
+
+pre-rollback: Executes before a rollback. Useful for preparing the environment for a rollback.
+
+post-rollback: Executes after a rollback is done. Often used for cleanup or reconfiguration tasks.
+
+crd-install: Used to load Custom Resource Definitions before the rest of the charts are loaded. This is crucial for charts that rely on CRDs.
+
+Example:
+Imagine you have a Helm chart for deploying a web application. You want to ensure a database is ready before your application starts. You could use a pre-install hook to deploy a job that sets up the database schema.
+```
+
+- Example 1
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "{{ .Release.Name }}-db-setup"
+  annotations:
+    "helm.sh/hook": pre-install
+spec:
+  template:
+    spec:
+      containers:
+      - name: schema-setup
+        image: mydb-setup-image:latest
+        command: ["setup-database.sh"]
+      restartPolicy: Never
+```
+
+```explain
+In this example, the Job Kubernetes resource will be executed before your application is installed, ensuring the database schema is set up. The "helm.sh/hook": pre-install annotation tells Helm to execute this job as a pre-install hook.
+```
+
+
 ### Helm Diff Plugin
 ```bash
 helm plugin install https://github.com/databus23/helm-diff
