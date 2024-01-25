@@ -384,6 +384,15 @@ helm show values bitnami/wordpress --version 10.0.3
 # Set custom values like wordpressUsername, wordpressPassword, etc.
 ```
 
+
+- Helm Package Management
+```bash
+helm package dirname
+helm package test 
+helm upgrade --install test ./test-0.1.0.tgz --namespace test --create-namespace --wait
+helm ls -A
+```
+
 - Installation and Monitoring
 ```bash
 Installation: helm upgrade --install wordpress bitnami/wordpress --values=wordpress-values.yaml --namespace wordpress --create-namespace --version 10.0.3 --debug
