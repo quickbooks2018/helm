@@ -249,7 +249,7 @@ Suppose you have a Helm chart where you want to perform an action only if a cert
 {{- end }}
 ```
 
-#### Helm Ranges 
+#### Helm Ranges (loops)
 
 - Q What is range in helm?
 - A The range function in Helm is used to iterate over a list of values. It allows you to perform a set of actions for each value in the list within a Helm template. This is particularly useful for creating repetitive elements in Kubernetes manifests based on a list of values provided, such as generating configuration for multiple pods or services.
@@ -364,10 +364,10 @@ spec:
 In this example, the Job Kubernetes resource will be executed before your application is installed, ensuring the database schema is set up. The "helm.sh/hook": pre-install annotation tells Helm to execute this job as a pre-install hook.
 ```
 
+- Note: In kubernetes we setup a job to setup the database schema, for this we add annotation "helm.sh/hook": pre-install
 
 ### Helm Diff Plugin
-```bash
-helm plugin install https://github.com/databus23/helm-diff
+``` plugin install https://github.com/databus23/helm-diff
 helm history release-name -n learning
 helm diff revision release-name 1 2
 helm diff revision hello 1 2 -n learning
@@ -379,7 +379,8 @@ helm diff revision hello 1 2 -n learning
 - Searching Versions: helm search repo wordpress --versions
 - Viewing Chart Values:
 
-```bash
+```bashbash
+helm
 helm show values bitnami/wordpress --version 10.0.3 
 # Set custom values like wordpressUsername, wordpressPassword, etc.
 ```
