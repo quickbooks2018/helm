@@ -6,14 +6,18 @@ kind: Deployment
 metadata:
   name: {{ .name }}
   labels:
-    {{- include "hello.labels" $ | nindent 4 }}
+  {{- if $.Values.fullnameOverride }}
+    fullname: {{ $.Values.fullnameOverride | quote }}
+  {{- end }}
 spec:
   {{- if not $.Values.autoscaling.enabled }}
   replicas: {{ $.Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "hello.selectorLabels" $ | nindent 6 }}
+    {{- if $.Values.fullnameOverride }}
+      fullname: {{ $.Values.fullnameOverride | quote }}
+    {{- end }}
   template:
     metadata:
       {{- with $.Values.podAnnotations }}
@@ -21,10 +25,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "hello.labels" $ | nindent 8 }}
-        {{- with $.Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+      {{- if $.Values.fullnameOverride }}
+        fullname: {{ $.Values.fullnameOverride | quote }}
+      {{- end }}
     spec:
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:

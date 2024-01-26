@@ -409,3 +409,9 @@ This section covers advanced Helm functionalities like Helm Secrets management, 
 - For detailed troubleshooting steps and more information, refer to the Helm documentation or community resources.
 
 - Note: This guide is intended to get you started with Helm. For comprehensive understanding, always refer to the official Helm documentation.
+
+
+- Important Note:
+```explain
+Remember, once a Deployment is created, you cannot change its spec.selector.matchLabels field. If you need to change this field, you will have to delete and recreate the Deployment, or use a different strategy for labeling your resources.
+```
