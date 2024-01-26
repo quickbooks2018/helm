@@ -1,10 +1,13 @@
 deployments:
   - name: deployment1
+    image: nginx
     imageTag: latest
   - name: deployment2
-    imageTag: alpine
+    image: quickbooks2018/blue
+    imageTag: latest
   - name: deployment3
-    imageTag: 1.15.8
+    image: quickbooks2018/green
+    imageTag: latest
 
 services:
   - name: service1
@@ -14,4 +17,4 @@ services:
 image:
   repository: nginx
   # Default image tag, used if a specific tag is not provided in deployments
-  tag: default_tag
+  tag: alpine

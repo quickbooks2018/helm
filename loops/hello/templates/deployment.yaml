@@ -37,7 +37,7 @@ spec:
         - name: {{ .name }}
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
-          image: "{{ $.Values.image.repository }}:{{ .imageTag | default $.Values.image.tag }}"
+          image: "{{ .image | default $.Values.image.repository }}:{{ .imageTag | default $.Values.image.tag }}"
           imagePullPolicy: {{ $.Values.image.pullPolicy }}
           ports:
             - name: http
