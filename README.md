@@ -3,6 +3,11 @@
 - Helm Installation
 - https://helm.sh/docs/intro/install/
 
+- kind kubernetes cluster installation on ubuntu box
+```bash
+wget https://raw.githubusercontent.com/quickbooks2018/kind-nginx-ingress/master/kind-ubuntu.sh
+```
+
 ```bash
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
