@@ -78,6 +78,13 @@ helm upgrade --install jenkins --namespace jenkins --create-namespace jenkins/je
 helm ls -A
 ```
 
+### Helm Get Values from existing chart installed
+```bash
+helm ls -A
+helm get values [RELEASE_NAME] --namespace [NAMESPACE]
+```
+
+
 ### Helm Syntax Checking with Helm Lint
 ```bash
 helm lint dirname direname2
